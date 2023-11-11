@@ -38,13 +38,15 @@ main()
   gray='#44475a'
   dark_gray='#282a36'
   light_purple='#bd93f9'
-  dark_purple='#ffd600'
+  yellow='#ffd600'
+  light_yellow='#fff176'
   cyan='#8be9fd'
   blue='#2196f3'
   orange='#ffb86c'
   red='#ff5555'
   pink='#ff79c6'
-  yellow='#f1fa8c'
+  dark_blue='#0d47a1'
+  forest_green='#1b5e20'
 
   # Handle left icon configuration
   case $show_left_icon in
@@ -88,7 +90,7 @@ main()
       flags=""
       current_flags="";;
     true)
-      flags="#{?window_flags,#[fg=${dark_purple}]#{window_flags},}"
+      flags="#{?window_flags,#[fg=${yellow}]#{window_flags},}"
       current_flags="#{?window_flags,#[fg=${light_purple}]#{window_flags},}"
   esac
 
@@ -108,11 +110,11 @@ main()
 
   # pane border styling
   if $show_border_contrast; then
-    tmux set-option -g pane-active-border-style "fg=${light_purple}"
+    tmux set-option -g pane-active-border-style "fg=${blue}"
   else
-    tmux set-option -g pane-active-border-style "fg=${dark_purple}"
+    tmux set-option -g pane-active-border-style "fg=${blue}"
   fi
-  tmux set-option -g pane-border-style "fg=${gray}"
+  tmux set-option -g pane-border-style "fg=${blue}"
 
   # message styling
   tmux set-option -g message-style "bg=${gray},fg=${white}"
@@ -234,7 +236,7 @@ main()
       script="#($current_dir/weather_wrapper.sh $show_fahrenheit $show_location $fixed_location)"
 
     elif [ $plugin = "time" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracula-time-colors" "dark_purple white")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracula-time-colors" "dark_blue white")
       if [ -n "$time_format" ]; then
         script=${time_format}
       else
@@ -273,9 +275,9 @@ main()
 
   # Window option
   if $show_powerline; then
-    tmux set-window-option -g window-status-current-format "#[fg=${gray},bg=${dark_purple}]${left_sep}#[fg=${dark_gray},bg=${dark_purple}] #I #W${current_flags} #[fg=${dark_purple},bg=${gray}]${left_sep}"
+    tmux set-window-option -g window-status-current-format "#[fg=${gray},bg=${yellow}]${left_sep}#[fg=${dark_gray},bg=${yellow}] #I #W${current_flags} #[fg=${yellow},bg=${gray}]${left_sep}"
   else
-    tmux set-window-option -g window-status-current-format "#[fg=${white},bg=${dark_purple}] #I #W${current_flags} "
+    tmux set-window-option -g window-status-current-format "#[fg=${white},bg=${yellow}] #I #W${current_flags} "
   fi
 
   tmux set-window-option -g window-status-format "#[fg=${white}]#[bg=${gray}] #I #W${flags}"
