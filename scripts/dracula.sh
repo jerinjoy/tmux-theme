@@ -38,9 +38,9 @@ main()
   gray='#44475a'
   dark_gray='#282a36'
   light_purple='#bd93f9'
-  dark_purple='#6272a4'
+  dark_purple='#ffd600'
   cyan='#8be9fd'
-  green='#50fa7b'
+  blue='#2196f3'
   orange='#ffb86c'
   red='#ff5555'
   pink='#ff79c6'
@@ -122,10 +122,10 @@ main()
 
   # Status left
   if $show_powerline; then
-    tmux set-option -g status-left "#[bg=${green},fg=${dark_gray}]#{?client_prefix,#[bg=${yellow}],} ${left_icon} #[fg=${green},bg=${gray}]#{?client_prefix,#[fg=${yellow}],}${left_sep}"
+    tmux set-option -g status-left "#[bg=${blue},fg=${dark_gray}]#{?client_prefix,#[bg=${yellow}],} ${left_icon} #[fg=${blue},bg=${gray}]#{?client_prefix,#[fg=${yellow}],}${left_sep}"
     powerbg=${gray}
   else
-    tmux set-option -g status-left "#[bg=${green},fg=${dark_gray}]#{?client_prefix,#[bg=${yellow}],} ${left_icon}"
+    tmux set-option -g status-left "#[bg=${blue},fg=${dark_gray}]#{?client_prefix,#[bg=${yellow}],} ${left_icon}"
   fi
 
   # Status right
@@ -148,19 +148,19 @@ main()
       IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracula-cwd-colors" "dark_gray white")
       tmux set-option -g status-right-length 250
       script="#($current_dir/cwd.sh)"
-    
+
     elif [ $plugin = "fossil" ]; then
-      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracula-fossil-colors" "green dark_gray")
+      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracula-fossil-colors" "blue dark_gray")
       tmux set-option -g status-right-length 250
       script="#($current_dir/fossil.sh)"
 
     elif [ $plugin = "git" ]; then
-      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracula-git-colors" "green dark_gray")
+      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracula-git-colors" "blue dark_gray")
       tmux set-option -g status-right-length 250
       script="#($current_dir/git.sh)"
 
     elif [ $plugin = "hg" ]; then
-      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracula-hg-colors" "green dark_gray")
+      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracula-hg-colors" "blue dark_gray")
       tmux set-option -g status-right-length 250
       script="#($current_dir/hg.sh)"
 
@@ -177,7 +177,7 @@ main()
       script="#($current_dir/gpu_ram_info.sh)"
 
     elif [ $plugin = "gpu-power-draw" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracula-gpu-power-draw-colors" "green dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracula-gpu-power-draw-colors" "blue dark_gray")
       script="#($current_dir/gpu_power.sh)"
 
     elif [ $plugin = "cpu-usage" ]; then
@@ -214,7 +214,7 @@ main()
       script="#($current_dir/attached_clients.sh)"
 
     elif [ $plugin = "spotify-tui" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracula-spotify-tui-colors" "green dark_gray")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracula-spotify-tui-colors" "blue dark_gray")
       script="#($current_dir/spotify-tui.sh)"
 
     elif [ $plugin = "kubernetes-context" ]; then
@@ -273,7 +273,7 @@ main()
 
   # Window option
   if $show_powerline; then
-    tmux set-window-option -g window-status-current-format "#[fg=${gray},bg=${dark_purple}]${left_sep}#[fg=${white},bg=${dark_purple}] #I #W${current_flags} #[fg=${dark_purple},bg=${gray}]${left_sep}"
+    tmux set-window-option -g window-status-current-format "#[fg=${gray},bg=${dark_purple}]${left_sep}#[fg=${dark_gray},bg=${dark_purple}] #I #W${current_flags} #[fg=${dark_purple},bg=${gray}]${left_sep}"
   else
     tmux set-window-option -g window-status-current-format "#[fg=${white},bg=${dark_purple}] #I #W${current_flags} "
   fi
